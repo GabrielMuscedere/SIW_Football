@@ -3,13 +3,20 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.component.CustomUserDetails;
 import it.uniroma3.siw.model.Credentials;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.IOException;
 
 @Controller
 public class AuthenticationController {
@@ -48,6 +55,33 @@ public class AuthenticationController {
         }
 
         return "redirect:/login";
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model,
+                          @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        if (userDetails.getCredentials().getRole().equals("ROLE_ADMIN") || userDetails.getCredentials().getRole().equals("ADMIN")) {
+            model.addAttribute("authentication", userDetails);
+            return "/admin/profile";
+        }
+        else if (userDetails.getCredentials().getRole().equals("ROLE_PRESIDENT") || userDetails.getCredentials().getRole().equals("PRESIDENT")) {
+            model.addAttribute("authentication", userDetails);
+            return "/president/profile";
+        }
+
+        return "redirect:/";
+
     }
 
 

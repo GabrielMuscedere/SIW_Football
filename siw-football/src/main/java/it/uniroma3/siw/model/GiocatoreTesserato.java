@@ -54,4 +54,12 @@ public class GiocatoreTesserato {
     public void setGiocatore(Giocatore giocatore) {
         this.giocatore = giocatore;
     }
+
+    public Squadra getSquadra() {
+        return squadra;
+    }
+
+    public void setSquadra(Squadra squadra) {
+        this.squadra = squadra;
+    }
 }

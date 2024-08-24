@@ -34,6 +34,11 @@ body {
     color: white;
 }
 
+.navbar a.logout-link:hover {
+    background-color: #ff0000; /* Rosso */
+    color: white; /* Cambia il colore del testo a bianco */
+}
+
 .navbar-right {
     margin-left: auto; /* Spinge il gruppo di link sulla destra */
     display: flex;
@@ -207,3 +212,50 @@ body {
 .newSquadra-button:hover {
     background-color: #28a428;
 }
+
+/*---NewSquadra----*/
+/* Stili specifici per la form del nuovo giocatore */
+.newGiocatore-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.newGiocatore-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.newGiocatore-form-group {
+    margin-bottom: 15px;
+}
+
+.newGiocatore-form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.newGiocatore-form-group input,
+.newGiocatore-form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.newGiocatore-form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.newGiocatore-form-group button:hover {
+    background-color: #45a049;
+}
+

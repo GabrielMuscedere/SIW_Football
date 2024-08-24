@@ -14,4 +14,8 @@ public class SquadraService {
     public Squadra save(Squadra squadra) {
         return squadraRepository.save(squadra);
     }
+
+    public Iterable<Squadra> findAll() {
+        return squadraRepository.findAll();
+    }
 }

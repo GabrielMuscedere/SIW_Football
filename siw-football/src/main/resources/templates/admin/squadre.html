@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Admin</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body>
@@ -23,21 +23,18 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getCredentials().getRole()}"></span>
-</div>
 
-<div>
-    <a th:href="@{/admin/squadre}"> Visualizza squadre </a>
-</div>
 
-<div>
-    <a th:href="@{/admin/giocatori}"> visualizza giocatori </a>
+<h1> Squadre: </h1>
+<div th:if="${squadre.isEmpty()}">
+    Non ci sono squadre
 </div>
-
 <div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ' + ${squadra.getPresidente()}"></p>
+    <p th:text="${squadra.getNome()} + ' ,' + ${squadra.getAnnoFondazione()}"></p>
+</div>
+
+<div>
+    <a th:href="@{/admin/formNewSquadra}"> aggiungi squadra</a>
 </div>
 
 </body>

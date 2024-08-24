@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CredentialsRepository extends CrudRepository<Credentials, Long> {
-
     Credentials findByUsername(String username);
 }

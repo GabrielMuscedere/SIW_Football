@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Admin</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body>
@@ -25,19 +25,11 @@
 </div>
 <div th:if="${authentication} != null">
     <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getCredentials().getRole()}"></span>
+    <span th:text="${authentication.getUsername()}"></span>
 </div>
 
-<div>
-    <a th:href="@{/admin/squadre}"> Visualizza squadre </a>
-</div>
-
-<div>
-    <a th:href="@{/admin/giocatori}"> visualizza giocatori </a>
-</div>
-
-<div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ' + ${squadra.getPresidente()}"></p>
+<div class="content">
+    Profilo Admin
 </div>
 
 </body>

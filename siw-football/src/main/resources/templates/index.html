@@ -14,17 +14,18 @@
     <a href="#services">Team</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-    <div class="navbar-right">
+    <div th:if="${authentication} == null" class="navbar-right">
         <a href="/login">Login</a>
         <a href="/register">Register</a>
     </div>
+    <div th:if="${authentication} != null" class="navbar-right">
+        <a href="/profile" th:text="${authentication.getUsername()}"></a>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Presidente:</span>
-    <span th:text="${authentication.getPresidente().getCodiceFiscale()}"></span>
 
-</div>
-<div class="content">
+<div>
+    <a th:href="@{president/giocatoriSvincolati}"> visualizza i giocatori che puoi tesserare </a>
 </div>
 
 </body>

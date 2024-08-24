@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Admin</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body>
 <!-- Navbar -->
 <div class="navbar">
-    <a href="/admin/indexAdmin" class="active">
+    <a href="/" class="active">
         <img src="images/ball.png" alt="Palla" class="logo">
     </a>
     <a href="#services">Team</a>
@@ -24,20 +24,16 @@
     </div>
 </div>
 <div th:if="${authentication} != null">
-    <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getCredentials().getRole()}"></span>
+    <span> sei loggato Presidente:</span>
+    <span th:text="${authentication.getPresidente().getCodiceFiscale()}"></span>
+</div>
+
+<div class="content">
+    Profilo Presidente
 </div>
 
 <div>
-    <a th:href="@{/admin/squadre}"> Visualizza squadre </a>
-</div>
-
-<div>
-    <a th:href="@{/admin/giocatori}"> visualizza giocatori </a>
-</div>
-
-<div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ' + ${squadra.getPresidente()}"></p>
+    <a th:href="'/president/squadra'"> Visualizza Squadra </a>
 </div>
 
 </body>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuovo Giocatore</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <a href="/admin/indexAdmin" class="active">
+        <img src="images/ball.png" alt="Palla" class="logo">
+    </a>
+    <a href="#services">Team</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div th:if="${authentication} == null" class="navbar-right">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+    <div th:if="${authentication} != null" class="navbar-right">
+        <a href="/profile" th:text="${authentication.getUsername()}"></a>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+</div>
+
+<!-- Form per creare un nuovo giocatore -->
+<div class="newGiocatore-form-container">
+    <h2>Inserisci Nuovo Giocatore</h2>
+    <form th:action="@{/admin/saveGiocatore}" method="post">
+        <div class="newGiocatore-form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="${giocatore.nome}" required>
+        </div>
+        <div class="newGiocatore-form-group">
+            <label for="cognome">Cognome:</label>
+            <input type="text" id="cognome" th:field="${giocatore.cognome}" required>
+        </div>
+        <div class="newGiocatore-form-group">
+            <label for="dataNascita">Data di Nascita:</label>
+            <input type="date" id="dataNascita" th:field="${giocatore.dataNascita}" required>
+        </div>
+        <div class="newGiocatore-form-group">
+            <label for="luogoNascita">Luogo di Nascita:</label>
+            <input type="text" id="luogoNascita" th:field="${giocatore.luogoNascita}" required>
+        </div>
+        <div class="newGiocatore-form-group">
+            <label for="ruolo">Ruolo:</label>
+            <input type="text" id="ruolo" th:field="${giocatore.ruolo}" required>
+        </div>
+        <div class="newGiocatore-form-group">
+            <button type="submit">Salva Giocatore</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

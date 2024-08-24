@@ -23,22 +23,17 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getCredentials().getRole()}"></span>
+
+<h1> Giocatori: </h1>
+<div th:if="${giocatori.isEmpty()}">
+    Non ci sono giocatori
+</div>
+<div th:each=" giocatore : ${giocatori}">
+    <p th:text="${giocatore.getNome()} + ' ,' + ${giocatore.getCognome()}"></p>
 </div>
 
 <div>
-    <a th:href="@{/admin/squadre}"> Visualizza squadre </a>
+    <a th:href="@{/admin/formNewGiocatore}"> aggiungi giocatore</a>
 </div>
-
-<div>
-    <a th:href="@{/admin/giocatori}"> visualizza giocatori </a>
-</div>
-
-<div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ' + ${squadra.getPresidente()}"></p>
-</div>
-
 </body>
 </html>

@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.component.CustomUserDetails;
+import it.uniroma3.siw.model.Giocatore;
 import it.uniroma3.siw.model.Presidente;
 import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.repository.PresidenteRepository;
@@ -61,6 +62,32 @@ public class SquadraController {
 
         return "redirect:/admin/indexAdmin";
     }
+
+    @GetMapping("/admin/squadre")
+    public String squadre(Model model,
+                          @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        Iterable<Squadra> squadre = squadraService.findAll();
+
+        List<Squadra> squadreLista = new ArrayList<>();
+        squadre.forEach(squadreLista::add);
+
+        model.addAttribute("authentication", userDetails);
+        model.addAttribute("squadre", squadreLista);
+
+        return "admin/squadre";
+    }
+
+    @GetMapping("/president/squadra")
+    public String squadra(Model model,
+                          @AuthenticationPrincipal CustomUserDetails userDetails){
+
+        model.addAttribute("authentication", userDetails);
+
+        return "president/squadra";
+
+    }
+
 
 
 }

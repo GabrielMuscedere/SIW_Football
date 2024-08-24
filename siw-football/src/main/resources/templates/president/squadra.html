@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Admin</title>
+    <title>Squadra</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body>
 <!-- Navbar -->
 <div class="navbar">
-    <a href="/admin/indexAdmin" class="active">
+    <a href="/" class="active">
         <img src="images/ball.png" alt="Palla" class="logo">
     </a>
     <a href="#services">Team</a>
@@ -23,21 +23,14 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getCredentials().getRole()}"></span>
+
+<div th:if="${authentication.getPresidente().getSquadra().getGiocatori().isEmpty()}">
+    Non ci sono giocatori tesserati
 </div>
 
-<div>
-    <a th:href="@{/admin/squadre}"> Visualizza squadre </a>
-</div>
-
-<div>
-    <a th:href="@{/admin/giocatori}"> visualizza giocatori </a>
-</div>
-
-<div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ' + ${squadra.getPresidente()}"></p>
+<div th:each=" giocatore : ${authentication.getPresidente().getSquadra().getGiocatori()}">
+    <p th:text="${giocatore.getGiocatore().getNome()} + ' - ' + ${giocatore.getGiocatore().getCognome()}"></p>
+    <p th:text="${giocatore.getInizioTesseramento().toString()} + ' - ' + ${giocatore.getFineTesseramento().toString()}"></p>
 </div>
 
 </body>
