@@ -1,0 +1,209 @@
+/* Stile generale del corpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Stile per la navBar in stile calcistico */
+.navbar {
+    background-color: #006400; /* Verde campo di calcio */
+    overflow: hidden;
+    border-bottom: 4px solid #ffffff; /* Linea bianca come le linee del campo */
+    display: flex;
+    align-items: center;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #ffd700; /* Giallo cartellino */
+    color: black;
+}
+
+.navbar a.active {
+    background-color: #32cd32; /* Verde più chiaro per la pagina attiva */
+    color: white;
+}
+
+.navbar-right {
+    margin-left: auto; /* Spinge il gruppo di link sulla destra */
+    display: flex;
+}
+
+.navbar a img.logo {
+    width: 30px; /* Dimensione dell'immagine della palla */
+    height: 30px;
+    vertical-align: middle; /* Allineamento verticale corretto */
+    margin-right: 8px; /* Spazio tra l'immagine e il testo */
+    background-color: transparent; /* Sfondo trasparente */
+}
+
+/* Stile per il contenuto */
+.content {
+    padding: 20px;
+}
+
+/*--Register---*/
+/* Stili specifici per la pagina di registrazione */
+
+.register-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form fieldset {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.register-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.register-form input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.register-button {
+    padding: 10px;
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-button:hover {
+    background-color: #28a428;
+}
+
+/*-- Login Page ------*/
+
+/* Stili specifici per la pagina di login */
+
+.loginPage-content {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.loginPage-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginPage-form fieldset {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.loginPage-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.loginPage-form input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.loginPage-button {
+    padding: 10px;
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.loginPage-button:hover {
+    background-color: #28a428;
+}
+
+
+/*--- FORM NEW SQUADRA ---*/
+/* Stili specifici per la pagina di nuova squadra */
+
+.newSquadra-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.newSquadra-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.newSquadra-form fieldset {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.newSquadra-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.newSquadra-form input,
+.newSquadra-form select {
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.newSquadra-button {
+    padding: 10px;
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.newSquadra-button:hover {
+    background-color: #28a428;
+}

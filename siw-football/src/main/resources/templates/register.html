@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <a href="/" class="active">
+        <img src="images/ball.png" alt="Palla" class="logo">
+    </a>
+    <a href="#services">Team</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div class="navbar-right">
+        <a href="#login">Login</a>
+        <a href="#register">Register</a>
+    </div>
+</div>
+
+<div class="register-content">
+    <h2>Registrazione Presidente</h2>
+    <form th:action="@{/register}" method="post" class="register-form">
+        <!-- Sezione Presidente -->
+        <fieldset>
+            <legend>Dati Presidente</legend>
+            <label for="register-nome">Nome:</label>
+            <input type="text" id="register-nome" th:field="${presidente.nome}" required>
+
+            <label for="register-cognome">Cognome:</label>
+            <input type="text" id="register-cognome" th:field="${presidente.cognome}" required>
+
+            <label for="register-dataNascita">Data di Nascita:</label>
+            <input type="date" id="register-dataNascita" th:field="${presidente.dataNascita}" required>
+
+            <label for="register-luogoNascita">Luogo di Nascita:</label>
+            <input type="text" id="register-luogoNascita" th:field="${presidente.luogoNascita}" required>
+
+            <label for="register-codiceFiscale">Codice Fiscale:</label>
+            <input type="text" id="register-codiceFiscale" th:field="${presidente.codiceFiscale}" required>
+        </fieldset>
+
+        <!-- Sezione Credenziali -->
+        <fieldset>
+            <legend>Credenziali di Accesso</legend>
+            <label for="register-username">Username:</label>
+            <input type="text" id="register-username" th:field="${credenziali.username}" required>
+
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" th:field="${credenziali.password}" required>
+
+        </fieldset>
+
+        <button type="submit" class="register-button">Registrati</button>
+    </form>
+</div>
+</body>
+</html>

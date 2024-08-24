@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <a href="/" class="active">
+        <img src="images/ball.png" alt="Palla" class="logo">
+    </a>
+    <a href="#services">Team</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div class="navbar-right">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+</div>
+<div th:if="${authentication} != null">
+    <span> sei loggato Presidente:</span>
+    <span th:text="${authentication.getPresidente().getCodiceFiscale()}"></span>
+
+</div>
+<div class="content">
+</div>
+
+</body>
+</html>

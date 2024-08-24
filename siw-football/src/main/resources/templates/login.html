@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <a href="/" class="active">
+        <img src="images/ball.png" alt="Palla" class="logo">
+    </a>
+    <a href="#services">Team</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div class="navbar-right">
+        <a href="#login">Login</a>
+        <a href="#register">Register</a>
+    </div>
+</div>
+
+<div class="loginPage-content">
+    <h2>Login</h2>
+    <form th:action="@{/login}" method="post" class="loginPage-form">
+        <!-- Sezione Credenziali di Login -->
+        <fieldset>
+            <legend>Inserisci le tue credenziali</legend>
+            <label for="loginPage-username">Username:</label>
+            <input type="text" id="loginPage-username" name="username" required>
+
+            <label for="loginPage-password">Password:</label>
+            <input type="password" id="loginPage-password" name="password" required>
+        </fieldset>
+
+        <button type="submit" class="loginPage-button">Accedi</button>
+
+        <div th:if="${param.error}">
+            <p>invalid username or password</p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

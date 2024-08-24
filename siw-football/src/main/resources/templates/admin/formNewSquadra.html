@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuova Squadra</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <a href="/" class="active">
+        <img src="images/ball.png" alt="Palla" class="logo">
+    </a>
+    <a href="#services">Team</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div class="navbar-right">
+        <a href="#login">Login</a>
+        <a href="#register">Register</a>
+    </div>
+</div>
+
+<div class="newSquadra-content">
+    <h2>Inserisci Nuova Squadra</h2>
+    <form th:action="@{/admin/saveSquadra}" method="post" class="newSquadra-form">
+        <!-- Campo Nome Squadra -->
+        <fieldset>
+            <legend>Dati Squadra</legend>
+            <label for="newSquadra-nome">Nome:</label>
+            <input type="text" id="newSquadra-nome" th:field="${squadra.nome}" required>
+
+            <label for="newSquadra-annoFondazione">Anno di Fondazione:</label>
+            <input type="date" id="newSquadra-annoFondazione" th:field="${squadra.annoFondazione}" required>
+
+            <label for="newSquadra-indirizzoSede">Indirizzo della Sede:</label>
+            <input type="text" id="newSquadra-indirizzoSede" th:field="${squadra.indirizzoSede}" required>
+        </fieldset>
+
+        <!-- Selezione Presidente -->
+        <fieldset>
+            <legend>Seleziona Presidente</legend>
+            <label for="newSquadra-presidente">Presidente:</label>
+            <select id="newSquadra-presidente" th:field="${squadra.presidente}" required>
+                <!-- I valori di esempio devono essere sostituiti con quelli dinamici -->
+                <option th:each="presidente : ${presidenti}" th:value="${presidente.codiceFiscale}" th:text="${presidente.nome}"></option>
+            </select>
+        </fieldset>
+
+        <button type="submit" class="newSquadra-button">Salva Squadra</button>
+    </form>
+</div>
+</body>
+</html>
