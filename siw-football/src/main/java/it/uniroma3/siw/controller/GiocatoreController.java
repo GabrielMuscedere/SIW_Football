@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
@@ -94,6 +95,17 @@ public class GiocatoreController {
         model.addAttribute("authentication", userDetails);
 
         return "/president/giocatoriSvincolati";
+    }
+
+    @GetMapping("/giocatore/{idGiocatore}")
+    public String giocatore(@PathVariable Long idGiocatore,
+                            @AuthenticationPrincipal CustomUserDetails userDetails,
+                            Model model) {
+
+        model.addAttribute("giocatore", giocatoreService.findById(idGiocatore));
+        model.addAttribute("authentication", userDetails);
+        model.addAttribute("today", LocalDate.now());
+        return "giocatore";
     }
 
 }

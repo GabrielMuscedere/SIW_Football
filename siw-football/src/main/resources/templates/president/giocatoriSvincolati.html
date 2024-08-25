@@ -5,7 +5,7 @@
     <title>Giocatori Svincolati</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
-<body>
+<body class="svincolatiPage">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/" class="active">
@@ -19,20 +19,31 @@
         <a href="/register">Register</a>
     </div>
     <div th:if="${authentication} != null" class="navbar-right">
+        <a href="/president/squadra">Squadra</a>
         <a href="/profile" th:text="${authentication.getUsername()}"></a>
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
 
-<div th:if="${giocatoriSvincolati.isEmpty()}">
-    Non ci sono giocatori svincolati
+<div class="svincolati-container">
+    <div th:if="${giocatoriSvincolati.isEmpty()}">
+        Non ci sono giocatori svincolati
+    </div>
+
+    <div th:each="giocatore : ${giocatoriSvincolati}" class="player-card">
+        <h2 th:text="${giocatore.getNome()} + ' ' + ${giocatore.getCognome()}"></h2>
+        <p><strong>Data di Nascita:</strong> <span th:text="${giocatore.getDataNascita()}"></span></p>
+        <p><strong>Luogo di Nascita:</strong> <span th:text="${giocatore.getLuogoNascita()}"></span></p>
+        <p><strong>Ruolo:</strong> <span th:text="${giocatore.getRuolo()}"></span></p>
+
+        <a th:href="'/giocatore/' + ${giocatore.getId()}" class="player-link">Visualizza Giocatore</a>
+
+        <form th:action="'/president/tesseraGiocatore' + '/' + ${giocatore.getId()} + '/' + ${authentication.getPresidente().getCodiceFiscale()} + '/' + ${authentication.getPresidente().getSquadra().getId()}" method="post">
+            <button class="loginPage-button" type="submit">Tessera</button>
+        </form>
+    </div>
 </div>
 
-<div th:each=" giocatore : ${giocatoriSvincolati}">
-    <a th:href="'/president/tesseraGiocatore/' + ${giocatore.id}">
-        <p th:text="${giocatore.getNome()} + ' ' + ${giocatore.getCognome()}"></p>
-    </a>
-</div>
 
 </body>
 </html>

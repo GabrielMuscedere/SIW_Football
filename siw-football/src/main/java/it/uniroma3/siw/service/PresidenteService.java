@@ -14,4 +14,8 @@ public class PresidenteService {
     public Presidente save(Presidente presidente) {
         return presidenteRepository.save(presidente);
     }
+
+    public Presidente findById(String id) {
+        return presidenteRepository.findById(id).get();
+    }
 }

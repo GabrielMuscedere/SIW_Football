@@ -5,7 +5,7 @@
     <title>Nuovo Giocatore</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
-<body>
+<body class="homePage">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/admin/indexAdmin" class="active">
@@ -23,6 +23,8 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
+<br>
+<br>
 
 <!-- Form per creare un nuovo giocatore -->
 <div class="newGiocatore-form-container">
@@ -46,7 +48,12 @@
         </div>
         <div class="newGiocatore-form-group">
             <label for="ruolo">Ruolo:</label>
-            <input type="text" id="ruolo" th:field="${giocatore.ruolo}" required>
+            <select id="ruolo" th:field="${giocatore.ruolo}" class="newGiocatore">
+                <option value="Attaccante">Attaccante</option>
+                <option value="Centrocampista">Centrocampista</option>
+                <option value="Difensore">Difensore</option>
+                <option value="Portiere">Portiere</option>
+            </select>
         </div>
         <div class="newGiocatore-form-group">
             <button type="submit">Salva Giocatore</button>

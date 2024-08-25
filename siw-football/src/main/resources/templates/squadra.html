@@ -25,36 +25,26 @@
     </div>
 </div>
 
-<div th:if="${authentication.getPresidente().getSquadra() == null}">
-    Non hai una squadra assegnata, contatta l'amministratore
-</div>
-
 <!-- Sezione dei dettagli della squadra -->
 <div class="squadra-details">
-    <h2 th:text="${authentication.getPresidente().getSquadra().getNome()}"></h2>
-    <p>Anno di Fondazione: <span th:text="${authentication.getPresidente().getSquadra().getAnnoFondazione()}"></span></p>
-    <p>Indirizzo Sede: <span th:text="${authentication.getPresidente().getSquadra().getIndirizzoSede()}"></span></p>
+    <h2 th:text="${squadra.getNome()}"></h2>
+    <p>Anno di Fondazione: <span th:text="${squadra.getAnnoFondazione()}"></span></p>
+    <p>Indirizzo Sede: <span th:text="${squadra.getIndirizzoSede()}"></span></p>
 </div>
 
 <!-- Sezione delle card dei giocatori -->
 <div class="squadra-container">
-    <div th:if="${authentication.getPresidente().getSquadra().getGiocatori().isEmpty()}">
+    <div th:if="${squadra.getGiocatori().isEmpty()}">
         Non ci sono giocatori tesserati
     </div>
 
-    <div th:each="giocatore : ${authentication.getPresidente().getSquadra().getGiocatori()}" class="player-card">
+    <div th:each="giocatore : ${squadra.getGiocatori()}" class="player-card">
         <h2 th:text="${giocatore.getGiocatore().getNome()} + ' ' + ${giocatore.getGiocatore().getCognome()}"></h2>
         <p>Data di Nascita: <span th:text="${giocatore.getGiocatore().getDataNascita()}"></span></p>
         <p>Luogo di Nascita: <span th:text="${giocatore.getGiocatore().getLuogoNascita()}"></span></p>
         <p>Ruolo: <span th:text="${giocatore.getGiocatore().getRuolo()}"></span></p>
         <a th:href="@{'/giocatore/' + ${giocatore.getGiocatore().getId()}}" class="player-link">Visualizza Dettagli</a>
     </div>
-</div>
-
-
-<!-- Pulsante per accedere alla pagina dei giocatori svincolati -->
-<div class="squadra-container">
-    <a href="/president/giocatoriSvincolati" class="svincolati-link">Visualizza Giocatori Svincolati</a>
 </div>
 
 </body>

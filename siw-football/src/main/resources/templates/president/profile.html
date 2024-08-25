@@ -19,21 +19,25 @@
         <a href="/register">Register</a>
     </div>
     <div th:if="${authentication} != null" class="navbar-right">
+        <a href="president/squadra">Squadra</a>
         <a href="/profile" th:text="${authentication.getUsername()}"></a>
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Presidente:</span>
-    <span th:text="${authentication.getPresidente().getCodiceFiscale()}"></span>
-</div>
 
-<div class="content">
-    Profilo Presidente
-</div>
-
-<div>
-    <a th:href="'/president/squadra'"> Visualizza Squadra </a>
+<div class="profilePresident-container">
+    <div class="profilePresident-card">
+        <h1>Profilo Presidente</h1>
+        <p><strong>Codice Fiscale:</strong> <span th:text="${authentication.getPresidente().getCodiceFiscale()}"></span></p>
+        <p><strong>Nome:</strong> <span th:text="${authentication.getPresidente().getNome()}"></span></p>
+        <p><strong>Cognome:</strong> <span th:text="${authentication.getPresidente().getCognome()}"></span></p>
+        <p><strong>Data di Nascita:</strong> <span th:text="${authentication.getPresidente().getDataNascita()}"></span></p>
+        <p><strong>Luogo di Nascita:</strong> <span th:text="${authentication.getPresidente().getLuogoNascita()}"></span></p>
+        <p><strong>Squadra:</strong> <span th:text="${authentication.getPresidente().getSquadra().getNome()}"></span></p>
+    </div>
+    <div class="profilePresident-actions">
+        <a th:href="'/president/squadra'" class="profilePresident-button">Visualizza Squadra</a>
+    </div>
 </div>
 
 </body>

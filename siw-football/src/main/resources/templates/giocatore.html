@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body class="homePage">
+<!-- Navbar -->
+<div class="navbar">
+    <a href="/" class="active">
+        <img src="images/ball.png" alt="Palla" class="logo">
+    </a>
+    <a href="#services">Team</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div th:if="${authentication} == null" class="navbar-right">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+    <div th:if="${authentication} != null" class="navbar-right">
+        <a href="president/squadra">Squadra</a>
+        <a href="/profile" th:text="${authentication.getUsername()}"></a>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+</div>
+
+<!-- Sezione Dettagli Giocatore -->
+<div class="player-details">
+    <h2 th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}">Nome Cognome</h2>
+    <p><strong>Data di Nascita:</strong> <span th:text="${giocatore.dataNascita}">01/01/2000</span></p>
+    <p><strong>Luogo di Nascita:</strong> <span th:text="${giocatore.luogoNascita}">Città</span></p>
+    <p><strong>Ruolo:</strong> <span th:text="${giocatore.ruolo}">Ruolo</span></p>
+</div>
+
+<!-- Sezione Tesseramenti -->
+<div class="tesseramenti">
+    <h3>Tesseramenti</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Inizio Tesseramento</th>
+            <th>Fine Tesseramento</th>
+            <th>Squadra</th>
+            <th th:if="${authentication != null}">Azione</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tesseramento : ${giocatore.getTesseramenti()}">
+            <td th:text="${tesseramento.getInizioTesseramento()}">dataInizio</td>
+            <td th:text="${tesseramento.getFineTesseramento()}">dataFine</td>
+            <td th:text="${tesseramento.getSquadra().getNome()}">Squadra Nome</td>
+            <td th:if="${authentication != null}">
+                <span th:if="${authentication.getCredentials().getPresidente().getCodiceFiscale().equals(tesseramento.getSquadra().getPresidente().getCodiceFiscale()) && tesseramento.getFineTesseramento().isAfter(today)}">
+                    <a th:href="@{'/president/terminaTesseramento/' + ${tesseramento.getId()} }">Termina tesseramento</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -18,4 +18,8 @@ public class SquadraService {
     public Iterable<Squadra> findAll() {
         return squadraRepository.findAll();
     }
+
+    public Squadra findById(Long id) {
+        return squadraRepository.findById(id).get();
+    }
 }

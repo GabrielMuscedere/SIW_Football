@@ -5,7 +5,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
-<body>
+<body class="homePage">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/" class="active">
@@ -19,13 +19,14 @@
         <a href="/register">Register</a>
     </div>
 </div>
-
+<br>
+<br>
+<br>
 <div class="loginPage-content">
     <h2>Login</h2>
     <form th:action="@{/login}" method="post" class="loginPage-form">
         <!-- Sezione Credenziali di Login -->
         <fieldset>
-            <legend>Inserisci le tue credenziali</legend>
             <label for="loginPage-username">Username:</label>
             <input type="text" id="loginPage-username" name="username" required>
 

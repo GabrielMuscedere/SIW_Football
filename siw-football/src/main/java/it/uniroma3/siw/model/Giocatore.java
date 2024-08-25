@@ -18,7 +18,7 @@ public class Giocatore {
     private String luogoNascita;
     private String ruolo;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<GiocatoreTesserato> tesseramenti;
 
     public Giocatore() {

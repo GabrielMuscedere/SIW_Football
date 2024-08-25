@@ -5,7 +5,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
-<body>
+<body class="homePage">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/" class="active">
@@ -19,13 +19,26 @@
         <a href="/register">Register</a>
     </div>
     <div th:if="${authentication} != null" class="navbar-right">
+        <a href="president/squadra">Squadra</a>
         <a href="/profile" th:text="${authentication.getUsername()}"></a>
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
 
-<div>
-    <a th:href="@{president/giocatoriSvincolati}"> visualizza i giocatori che puoi tesserare </a>
+
+<!-- Scritta centrale -->
+<div class="homePage-banner">
+    <h1>Siw-Football</h1>
+</div>
+
+<!-- Container per le squadre -->
+<div class="homePage-squadra-container">
+    <div th:each="squadra : ${squadre}" class="homePage-squadra-card">
+        <h2 th:text="${squadra.getNome()}"></h2>
+        <p><strong>Anno di Fondazione:</strong> <span th:text="${squadra.getAnnoFondazione()}"></span></p>
+        <p><strong>Indirizzo:</strong> <span th:text="${squadra.getIndirizzoSede()}"></span></p>
+        <a th:href="'/squadra/' + ${squadra.getId()}" class="homePage-squadra-link">Visualizza Dettagli</a>
+    </div>
 </div>
 
 </body>

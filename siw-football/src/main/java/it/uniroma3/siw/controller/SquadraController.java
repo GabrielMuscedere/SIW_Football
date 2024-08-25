@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -79,15 +80,24 @@ public class SquadraController {
     }
 
     @GetMapping("/president/squadra")
-    public String squadra(Model model,
+    public String squadraPresidente(Model model,
                           @AuthenticationPrincipal CustomUserDetails userDetails){
 
         model.addAttribute("authentication", userDetails);
 
         return "president/squadra";
-
     }
 
+    @GetMapping("/squadra/{idSquadra}")
+    public String squadra(Model model,
+                          @PathVariable Long idSquadra,
+                          @AuthenticationPrincipal CustomUserDetails userDetails){
+
+        model.addAttribute("authentication", userDetails);
+        model.addAttribute("squadra", squadraService.findById(idSquadra));
+
+        return "squadra";
+    }
 
 
 }

@@ -16,7 +16,7 @@ public class Squadra {
     private LocalDate annoFondazione;
     private String indirizzoSede;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<GiocatoreTesserato> giocatori;
 
     @OneToOne

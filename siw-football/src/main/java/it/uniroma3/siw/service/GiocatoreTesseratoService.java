@@ -14,4 +14,8 @@ public class GiocatoreTesseratoService {
     public GiocatoreTesserato save(GiocatoreTesserato giocatoreTesserato) {
         return giocatoreTesseratoRepository.save(giocatoreTesserato);
     }
+
+    public GiocatoreTesserato findById(Long id) {
+        return giocatoreTesseratoRepository.findById(id).get();
+    }
 }

@@ -1,11 +1,89 @@
 /* Stile generale del corpo */
-body {
+
+/* --HOME PAGE--*/
+/* Stile generale per la home page */
+body.homePage {
+    background-color: #ccffcc; /* Light green background */
     font-family: Arial, sans-serif;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
 }
 
+.homePage-banner {
+    background-color: #006400;
+    border: 5px solid #004d00;
+    border-radius: 15px;
+    padding: 20px 20px;  /* Reduced padding to tighten the box */
+    margin-top: 50px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;  /* Limit the width of the banner */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.homePage-banner h1 {
+    color: white;
+    font-size: 48px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* Container delle squadre */
+.homePage-squadra-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 40px 20px;
+}
+
+.homePage-squadra-card {
+    background-color: #e0f8e0;  /* Light green */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    margin: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.homePage-squadra-card:hover {
+    transform: scale(1.05);
+}
+
+.homePage-squadra-card h2 {
+    color: #006400; /* Verde scuro */
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.homePage-squadra-card p {
+    font-size: 16px;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+}
+
+.homePage-squadra-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+
+.homePage-squadra-link:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
 /* Stile per la navBar in stile calcistico */
 .navbar {
     background-color: #006400; /* Verde campo di calcio */
@@ -60,6 +138,7 @@ body {
 /*--Register---*/
 /* Stili specifici per la pagina di registrazione */
 
+
 .register-content {
     max-width: 600px;
     margin: 0 auto;
@@ -92,6 +171,8 @@ body {
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 14px;
+    width: 100%; /* Ensure input fields take up the full width */
+    box-sizing: border-box; /* Prevent padding from affecting the width */
 }
 
 .register-button {
@@ -107,18 +188,19 @@ body {
 .register-button:hover {
     background-color: #28a428;
 }
-
 /*-- Login Page ------*/
 
 /* Stili specifici per la pagina di login */
 
+
 .loginPage-content {
-    max-width: 400px;
+    max-width: 350px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #ffffff; /* Changed to pure white for a cleaner look */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+    border: 1px solid #dddddd; /* Added a light border */
 }
 
 .loginPage-form {
@@ -127,33 +209,37 @@ body {
 }
 
 .loginPage-form fieldset {
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
+    border: none; /* Removed the fieldset border */
+    margin-bottom: 20px;
+    padding: 0;
 }
 
 .loginPage-form label {
     margin-bottom: 5px;
     font-weight: bold;
+    font-size: 14px; /* Slightly larger font size for better readability */
+    color: #333333; /* Darker font color for better contrast */
 }
 
 .loginPage-form input {
     margin-bottom: 15px;
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 14px;
+    width: 100%; /* Ensures the input takes full width */
+    box-sizing: border-box; /* Ensures padding doesn't exceed width */
 }
 
 .loginPage-button {
-    padding: 10px;
+    padding: 12px;
     background-color: #32cd32;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .loginPage-button:hover {
@@ -259,3 +345,298 @@ body {
     background-color: #45a049;
 }
 
+/*--- Squadra Page ---*/
+
+/* Stile generale per la pagina squadra */
+
+/* Stile per i dettagli della squadra */
+.squadraPage .squadra-details {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.squadraPage .squadra-details h2 {
+    color: #006400; /* Verde scuro */
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.squadraPage .squadra-details p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+body.squadraPage {
+    background-color: #ccffcc; /* Light green background */
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.squadraPage .squadra-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.squadraPage .player-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+
+.squadraPage .squadra-container :hover {
+    transform: scale(1.05);
+}
+
+.squadraPage .player-card h2 {
+    color: #006400; /* Verde scuro */
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+.squadraPage .player-card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.squadraPage .player-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.squadraPage .player-link:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
+
+.squadraPage .svincolati-link {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: fit-content;
+    transition: background-color 0.3s;
+}
+
+.squadraPage .svincolati-link:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
+
+/*----Giocatore Page----*/
+/* Stile generale della pagina */
+body.giocatorePage {
+    font-family: Arial, sans-serif;
+    background-color: #d4edda; /* Verde che richiama il campo da calcio */
+    margin: 0;
+    padding: 0;
+}
+
+/* Sezione Dettagli Giocatore */
+.player-details {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.player-details h2 {
+    margin-top: 0;
+    color: #2d572c; /* Verde scuro */
+}
+
+.player-details p {
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Sezione Tesseramenti */
+.tesseramenti {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tesseramenti h3 {
+    color: #2d572c; /* Verde scuro */
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #2d572c; /* Verde scuro */
+}
+
+td {
+    background-color: #fff;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/*---Profile President----*/
+
+.profilePresident-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+}
+
+.profilePresident-card {
+    background-color: #e0ffe0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profilePresident-card h1 {
+    color: #006400; /* Verde scuro per il titolo */
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.profilePresident-card p {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.profilePresident-card p strong {
+    color: #006400; /* Verde scuro per le etichette */
+}
+
+.profilePresident-actions {
+    margin-top: 20px;
+}
+
+.profilePresident-button {
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profilePresident-button:hover {
+    background-color: #004d00; /* Verde più scuro per il hover */
+}
+
+.logo {
+    height: 40px;
+    vertical-align: middle;
+}
+
+/*----Svincolati Page --------*/
+
+/* Stile generale per la pagina svincolati */
+body.svincolatiPage {
+    background-color: #ccffcc; /* Light green background */
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.svincolatiPage .svincolati-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.svincolatiPage .player-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.svincolatiPage .player-card h2 {
+    color: #006400; /* Verde scuro */
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.svincolatiPage .player-card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.svincolatiPage .player-link, .svincolatiPage .player-link button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.svincolatiPage .player-link:hover, .svincolatiPage .player-link button:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
+
+.svincolatiPage form {
+    display: inline-block;
+    margin-top: 10px;
+}
