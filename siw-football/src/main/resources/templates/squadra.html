@@ -11,9 +11,8 @@
     <a href="/" class="active">
         <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
-    <a href="#services">Team</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
     <div th:if="${authentication} == null" class="navbar-right">
         <a href="/login">Login</a>
         <a href="/register">Register</a>
@@ -27,9 +26,12 @@
 
 <!-- Sezione dei dettagli della squadra -->
 <div class="squadra-details">
-    <h2 th:text="${squadra.getNome()}"></h2>
-    <p>Anno di Fondazione: <span th:text="${squadra.getAnnoFondazione()}"></span></p>
-    <p>Indirizzo Sede: <span th:text="${squadra.getIndirizzoSede()}"></span></p>
+    <img th:src="@{'/uploads/' + ${squadra.getImageUrl()}}" alt="Logo di Squadra" class="squadra-logo">
+    <div>
+        <h2 th:text="${squadra.getNome()}"></h2>
+        <p>Anno di Fondazione: <span th:text="${squadra.getAnnoFondazione()}"></span></p>
+        <p>Indirizzo Sede: <span th:text="${squadra.getIndirizzoSede()}"></span></p>
+    </div>
 </div>
 
 <!-- Sezione delle card dei giocatori -->
@@ -47,5 +49,12 @@
     </div>
 </div>
 
+<br>
+<br>
+<br>
+
+<footer class="aboutPage-footer">
+    <p>&copy; 2024 Siw-Football. All rights reserved.</p>
+</footer>
 </body>
 </html>

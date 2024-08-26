@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact</title>
+  <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
+</head>
+<body class="homePage">
+<!-- Navbar -->
+<div class="navbar">
+  <a href="/" class="active">
+    <img src="/images/ball.png" alt="Palla" class="logo">
+  </a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+  <div th:if="${authentication} == null" class="navbar-right">
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </div>
+  <div th:if="${authentication} != null" class="navbar-right">
+    <a href="president/squadra">Squadra</a>
+    <a href="/profile" th:text="${authentication.getUsername()}"></a>
+    <a href="/logout" class="logout-link">Logout</a>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="contactPage-content">
+  <h2>Contattaci</h2>
+  <form class="contactPage-form">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Messaggio:</label>
+    <textarea id="message" name="message" rows="6" required></textarea>
+
+    <!-- Usa un link mailto per inviare l'email -->
+    <a href="#" class="contactPage-button" id="sendEmailButton">Invia</a>
+  </form>
+</div>
+
+<br>
+<br>
+<br>
+
+<footer class="aboutPage-footer">
+  <p>&copy; 2024 Siw-Football. All rights reserved.</p>
+</footer>
+
+<script>
+  document.getElementById('sendEmailButton').addEventListener('click', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    const mailtoLink = `mailto:gabrielmuscedere@gmail.com?subject=Contact%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(email)}`;
+    window.location.href = mailtoLink;
+  });
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gestione Squadra</title>
+    <title>Modifica Squadra</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body class="homePage">
@@ -11,9 +11,6 @@
     <a href="/admin/indexAdmin" class="active">
         <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
-    <a href="#services">Team</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
     <div th:if="${authentication} == null" class="navbar-right">
         <a href="/login">Login</a>
         <a href="/register">Register</a>
@@ -26,12 +23,13 @@
 
 <br>
 <br>
-<div class="newSquadra-content">
+<div class="modificaSquadra-content">
     <h2>Modifica squadra</h2>
-    <form th:action="@{'/admin/salvaModifiche/' + ${squadra.getId()}}" method="post" enctype="multipart/form-data">
+    <form class="modificaSquadra-form" th:action="@{'/admin/salvaModifiche/' + ${squadra.getId()}}" method="post" enctype="multipart/form-data">
         <!-- Campo Nome Squadra -->
         <fieldset>
             <legend>Dati Squadra</legend>
+
             <label for="squadra-nome">Nome:</label>
             <input type="text" id="squadra-nome" th:field="${squadra.nome}">
 
@@ -41,11 +39,10 @@
             <label for="squadra-indirizzoSede">Indirizzo della Sede:</label>
             <input type="text" id="squadra-indirizzoSede" th:field="${squadra.indirizzoSede}" required>
 
-            <label for="squadra-logo">Logo</label>
+            <label for="squadra-logo">Logo:</label>
             <input type="file" id="squadra-logo" name="file">
         </fieldset>
 
-        <!-- Selezione Presidente
         <fieldset>
             <legend>Cambia presidente</legend>
             <label for="squadra-presidente">Presidente:</label>
@@ -53,10 +50,19 @@
                 <option th:each="presidente : ${presidenti}" th:value="${presidente.codiceFiscale}" th:text="${presidente.nome}"></option>
             </select>
         </fieldset>
-         -->
 
         <button type="submit" class="newSquadra-button">Salva Squadra</button>
     </form>
+</div>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer class="aboutPage-footer">
+    <p>&copy; 2024 Siw-Football. All rights reserved.</p>
+</footer>
 </body>
 </html>

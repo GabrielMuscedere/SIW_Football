@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Profilo Admin</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body class="homePage">
@@ -11,9 +11,6 @@
     <a href="/admin/indexAdmin" class="active">
         <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
-    <a href="#services">Team</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
     <div th:if="${authentication} == null" class="navbar-right">
         <a href="/login">Login</a>
         <a href="/register">Register</a>
@@ -23,14 +20,35 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getUsername()}"></span>
+
+<!-- Profilo Admin -->
+<div class="adminProfile-container">
+    <div class="adminProfile-header">
+        <h1>Profilo Admin</h1>
+    </div>
+    <div class="adminProfile-details">
+       <!-- <img src="/images/admin-avatar.png" alt="Admin Avatar"> -->
+        <div>
+            <h2 th:text="${authentication.getUsername()}">Nome Admin</h2>
+
+            <p>Ruolo: Amministratore</p>
+        </div>
+    </div>
+    <!--
+    <div class="adminProfile-actions">
+        <a href="/admin/editProfile">Modifica Profilo</a>
+        <a href="/admin/changePassword">Cambia Password</a>
+    </div>
+    -->
 </div>
 
-<div class="content">
-    Profilo Admin
-</div>
+<br>
+<br>
+<br>
+
+<footer class="aboutPage-footer">
+    <p>&copy; 2024 Siw-Football. All rights reserved.</p>
+</footer>
 
 </body>
 </html>

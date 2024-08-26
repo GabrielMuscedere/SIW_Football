@@ -352,7 +352,6 @@ body.homePage {
 
 /*--- Squadra Page ---*/
 
-/* Stile generale per la pagina squadra */
 
 /* Stile per i dettagli della squadra */
 .squadraPage .squadra-details {
@@ -363,7 +362,17 @@ body.homePage {
     margin: 20px auto;
     width: 80%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left; /* Cambiato da center a left */
+    display: flex; /* Aggiunto per creare layout flessibile */
+    align-items: center; /* Allinea verticalmente il contenuto */
+}
+
+.squadraPage .squadra-logo {
+    height: 100px;
+    width: auto;
+    margin-right: 20px; /* Spazio tra l'immagine e il testo */
+    object-fit: contain;
+    flex-shrink: 0; /* Impedisce all'immagine di ridimensionarsi */
 }
 
 .squadraPage .squadra-details h2 {
@@ -404,7 +413,6 @@ body.squadraPage {
     transition: transform 0.3s ease;
 }
 
-
 .squadraPage .squadra-container :hover {
     transform: scale(1.05);
 }
@@ -414,7 +422,6 @@ body.squadraPage {
     font-size: 20px;
     margin-bottom: 10px;
 }
-
 
 .squadraPage .player-card p {
     font-size: 14px;
@@ -868,4 +875,252 @@ body.indxAdmin {
 
 .adminGiocatori-actions a:hover {
     background-color: #004d00; /* Verde ancora più scuro */
+}
+
+/*---adminProfile---*/
+/* Admin Profile Page */
+.adminProfile-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.adminProfile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.adminProfile-header h1 {
+    font-size: 28px;
+    color: #006400; /* Verde scuro */
+    margin: 0;
+}
+
+.adminProfile-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.adminProfile-details img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.adminProfile-details div {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.adminProfile-details h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.adminProfile-details p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.adminProfile-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.adminProfile-actions a {
+    display: inline-block;
+    margin: 10px 15px;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.adminProfile-actions a:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
+
+
+/*--About Page--*/
+.aboutPage-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.aboutPage h1 {
+    color: #006400; /* Verde scuro */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.aboutPage h2 {
+    color: #006400; /* Verde scuro */
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.aboutPage p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.aboutPage-footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/*--modificaSquadra--*/
+.modificaSquadra-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modificaSquadra-content h2 {
+    text-align: center;
+    color: #006400; /* Verde scuro */
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.modificaSquadra-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modificaSquadra-form fieldset {
+    border: 2px solid #006400; /* Verde scuro */
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.modificaSquadra-form legend {
+    font-weight: bold;
+    color: #006400; /* Verde scuro */
+    padding: 0 10px;
+}
+
+.modificaSquadra-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+    color: #333;
+}
+
+.modificaSquadra-form input[type="text"],
+.modificaSquadra-form input[type="date"],
+.modificaSquadra-form input[type="file"],
+.modificaSquadra-form select {
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.newSquadra-button {
+    padding: 12px;
+    background-color: #32cd32; /* Verde più chiaro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.newSquadra-button:hover {
+    background-color: #28a428; /* Verde più scuro */
+}
+
+/*--contact page---*/
+.contactPage-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contactPage-content h2 {
+    text-align: center;
+    color: #006400; /* Verde scuro */
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.contactPage-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactPage-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+    color: #333;
+}
+
+.contactPage-form input[type="text"],
+.contactPage-form input[type="email"],
+.contactPage-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contactPage-form textarea {
+    resize: vertical;
+}
+
+.contactPage-button {
+    padding: 12px;
+    background-color: #32cd32; /* Verde più chiaro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.contactPage-button:hover {
+    background-color: #28a428; /* Verde più scuro */
 }

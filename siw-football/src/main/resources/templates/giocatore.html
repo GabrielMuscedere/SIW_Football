@@ -11,9 +11,8 @@
     <a href="/" class="active">
         <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
-    <a href="#services">Team</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
     <div th:if="${authentication} == null" class="navbar-right">
         <a href="/login">Login</a>
         <a href="/register">Register</a>
@@ -60,5 +59,12 @@
     </table>
 </div>
 
+<br>
+<br>
+<br>
+
+<footer class="aboutPage-footer">
+    <p>&copy; 2024 Siw-Football. All rights reserved.</p>
+</footer>
 </body>
 </html>

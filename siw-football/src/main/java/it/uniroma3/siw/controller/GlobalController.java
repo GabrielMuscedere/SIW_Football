@@ -22,4 +22,22 @@ public class GlobalController {
         return "/index";
     }
 
+    @GetMapping("/about")
+    public String getAbout(Model model,
+                           @AuthenticationPrincipal CustomUserDetails user) {
+
+        model.addAttribute("authentication", user);
+
+        return "/about";
+    }
+
+    @GetMapping("/contact")
+    public String getContact(Model model,
+                             @AuthenticationPrincipal CustomUserDetails user) {
+
+        model.addAttribute("authentication", user);
+
+        return "/contact";
+    }
+
 }
