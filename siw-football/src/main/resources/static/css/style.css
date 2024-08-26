@@ -267,22 +267,27 @@ body.homePage {
 .newSquadra-form fieldset {
     border: 1px solid #ccc;
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 20px;  /* Aumenta il padding per dare più spazio tra gli elementi */
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;  /* Allinea gli elementi verticalmente */
 }
 
 .newSquadra-form label {
-    margin-bottom: 5px;
+    margin-bottom: 10px;  /* Spazio extra sotto le etichette per una migliore leggibilità */
     font-weight: bold;
 }
 
+
 .newSquadra-form input,
 .newSquadra-form select {
-    margin-bottom: 15px;
-    padding: 8px;
+    margin-bottom: 20px;  /* Aumenta lo spazio tra i campi */
+    padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    font-size: 14px;
+    font-size: 16px;
+    width: 100%;  /* Fai in modo che i campi occupino l'intera larghezza disponibile */
+    box-sizing: border-box;  /* Assicurati che il padding non aumenti la larghezza totale */
 }
 
 .newSquadra-button {
@@ -299,7 +304,7 @@ body.homePage {
     background-color: #28a428;
 }
 
-/*---NewSquadra----*/
+/*---NewGiocatore----*/
 /* Stili specifici per la form del nuovo giocatore */
 .newGiocatore-form-container {
     max-width: 600px;
@@ -639,4 +644,228 @@ body.svincolatiPage {
 .svincolatiPage form {
     display: inline-block;
     margin-top: 10px;
+}
+
+/*--indexAdmin--*/
+/* Stili specifici per l'index admin */
+body.indxAdmin {
+    background-color: #ccffcc; /* Light green background */
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.indxAdmin-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+    max-width: 1200px; /* Limita la larghezza massima del container */
+    margin-left: auto;  /* Centra il container orizzontalmente */
+    margin-right: auto; /* Centra il container orizzontalmente */
+}
+
+.indxAdmin-card {
+    background-color: #ffffff;
+    border: 2px solid #006400; /* Verde scuro */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    max-width: 400px; /* Limita la larghezza massima delle card */
+}
+
+.indxAdmin-card:hover {
+    transform: scale(1.05);
+}
+
+.indxAdmin-card img {
+    width: 130px; /* Aumenta la larghezza dell'immagine */
+    height: 130px; /* Aumenta l'altezza dell'immagine */
+    margin-bottom: 15px;
+}
+
+.indxAdmin-card h3 {
+    color: #006400;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.indxAdmin-card a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.indxAdmin-card a:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
+
+/*-Admin squadre-*/
+
+.adminSquadre-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.adminSquadre-title {
+    text-align: center;
+    color: #006400; /* Verde scuro */
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.adminSquadre-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.adminSquadre-card {
+    background-color: #ffffff;
+    border: 2px solid #006400; /* Verde scuro */
+    border-radius: 10px;
+    padding: 0; /* Rimuovi il padding dalla card */
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden; /* Assicura che i contenuti non escano dalla card */
+}
+
+.adminSquadre-card:hover {
+    transform: scale(1.05); /* Effetto di ingrandimento */
+}
+
+.adminSquadre-card-content {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Assicura che il contenuto occupi tutta la larghezza della card */
+}
+
+.adminSquadre-logo {
+    height: 100px; /* Imposta un'altezza fissa per il logo */
+    width: 100px; /* Imposta una larghezza fissa per mantenere tutte le immagini di dimensioni uniformi */
+    margin-right: 20px; /* Spazio tra il logo e la descrizione */
+    object-fit: cover; /* Assicura che l'immagine copra tutto lo spazio disponibile senza distorsioni */
+}
+
+.adminSquadre-text {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.adminSquadre-card h2 {
+    color: #006400;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.adminSquadre-card p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+.adminSquadre-card a {
+    text-decoration: none; /* Rimuove la sottolineatura dai link */
+    color: inherit; /* Mantiene il colore del testo della card */
+}
+
+.adminSquadre-card a:hover {
+    text-decoration: none; /* Assicura che non ci sia sottolineatura anche al passaggio del mouse */
+}
+
+.adminSquadre-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.adminSquadre-actions a {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.adminSquadre-actions a:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
+}
+
+/*--adminGiocatori--*/
+.adminGiocatori-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.adminGiocatori-title {
+    text-align: center;
+    color: #006400; /* Verde scuro */
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.adminGiocatori-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.adminGiocatori-card {
+    background-color: #ffffff;
+    border: 2px solid #006400; /* Verde scuro */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.adminGiocatori-card:hover {
+    transform: scale(1.05);
+}
+
+.adminGiocatori-card h2 {
+    color: #006400;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.adminGiocatori-card p {
+    font-size: 16px;
+    color: #333;
+}
+
+.adminGiocatori-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.adminGiocatori-actions a {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    background-color: #006400; /* Verde scuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.adminGiocatori-actions a:hover {
+    background-color: #004d00; /* Verde ancora più scuro */
 }

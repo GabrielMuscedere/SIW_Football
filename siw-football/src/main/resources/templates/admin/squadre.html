@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Gestione Squadre</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body class="homePage">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/admin/indexAdmin" class="active">
-        <img src="images/ball.png" alt="Palla" class="logo">
+        <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
     <a href="#services">Team</a>
     <a href="#about">About</a>
@@ -24,17 +24,29 @@
     </div>
 </div>
 
+<div class="adminSquadre-container">
+    <h1 class="adminSquadre-title">Squadre</h1>
 
-<h1> Squadre: </h1>
-<div th:if="${squadre.isEmpty()}">
-    Non ci sono squadre
-</div>
-<div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ,' + ${squadra.getAnnoFondazione()}"></p>
-</div>
+    <div th:if="${squadre.isEmpty()}">
+        Non ci sono squadre
+    </div>
+    <div class="adminSquadre-list" th:each="squadra : ${squadre}">
+        <div class="adminSquadre-card">
+            <a th:href="'/admin/gestisciSquadra/' + ${squadra.getId()}">
+                <div class="adminSquadre-card-content">
+                    <img th:src="@{'/uploads/' + ${squadra.getImageUrl()}}" alt="Logo di Squadra" class="adminSquadre-logo">
+                    <div class="adminSquadre-text">
+                        <h2 th:text="${squadra.getNome()}"></h2>
+                        <p th:text="'Anno di Fondazione: ' + ${squadra.getAnnoFondazione()}"></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 
-<div>
-    <a th:href="@{/admin/formNewSquadra}"> aggiungi squadra</a>
+    <div class="adminSquadre-actions">
+        <a th:href="@{/admin/formNewSquadra}">Aggiungi Squadra</a>
+    </div>
 </div>
 
 </body>

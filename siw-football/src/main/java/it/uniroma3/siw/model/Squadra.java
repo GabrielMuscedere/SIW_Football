@@ -15,6 +15,7 @@ public class Squadra {
     private String nome;
     private LocalDate annoFondazione;
     private String indirizzoSede;
+    private String imageUrl;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<GiocatoreTesserato> giocatori;
@@ -73,4 +74,11 @@ public class Squadra {
         this.presidente = presidente;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

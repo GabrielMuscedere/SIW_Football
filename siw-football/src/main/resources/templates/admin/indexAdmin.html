@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Admin</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
-<body class="homePage">
+<body class="indxAdmin">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/admin/indexAdmin" class="active">
-        <img src="images/ball.png" alt="Palla" class="logo">
+        <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
     <a href="#services">Team</a>
     <a href="#about">About</a>
@@ -23,21 +23,20 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
-<div th:if="${authentication} != null">
-    <span> sei loggato Admin:</span>
-    <span th:text="${authentication.getCredentials().getRole()}"></span>
-</div>
 
-<div>
-    <a th:href="@{/admin/squadre}"> Visualizza squadre </a>
-</div>
-
-<div>
-    <a th:href="@{/admin/giocatori}"> visualizza giocatori </a>
-</div>
-
-<div th:each=" squadra : ${squadre}">
-    <p th:text="${squadra.getNome()} + ' ' + ${squadra.getPresidente()}"></p>
+<!-- Container principale -->
+<div class="indxAdmin-container">
+    <div class="indxAdmin-card">
+        <img src="/images/team.png" alt="Icona squadre">
+        <h3>Gestione Squadre</h3>
+        <a th:href="@{/admin/squadre}">Gestisci squadre</a>
+    </div>
+    <div class="indxAdmin-card">
+        <img src="/images/player.png" alt="Icona giocatori">
+        <h3>Gestione Giocatori</h3>
+        <a th:href="@{/admin/giocatori}">Gestisci giocatori</a>
+    </div>
+    <!-- Aggiungi altre card di gestione se necessario -->
 </div>
 
 </body>

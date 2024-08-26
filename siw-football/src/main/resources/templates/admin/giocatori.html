@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Admin</title>
+    <title>Gestione Giocatori</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body class="homePage">
 <!-- Navbar -->
 <div class="navbar">
     <a href="/admin/indexAdmin" class="active">
-        <img src="images/ball.png" alt="Palla" class="logo">
+        <img src="/images/ball.png" alt="Palla" class="logo">
     </a>
     <a href="#services">Team</a>
     <a href="#about">About</a>
@@ -24,16 +24,24 @@
     </div>
 </div>
 
-<h1> Giocatori: </h1>
-<div th:if="${giocatori.isEmpty()}">
-    Non ci sono giocatori
-</div>
-<div th:each=" giocatore : ${giocatori}">
-    <p th:text="${giocatore.getNome()} + ' ,' + ${giocatore.getCognome()}"></p>
+<div class="adminGiocatori-container">
+    <h1 class="adminGiocatori-title">Giocatori</h1>
+
+    <div th:if="${giocatori.isEmpty()}">
+        Non ci sono giocatori
+    </div>
+    <div class="adminGiocatori-list" th:each="giocatore : ${giocatori}">
+        <div class="adminGiocatori-card">
+            <h2 th:text="${giocatore.getNome()} + ' ' + ${giocatore.getCognome()}"></h2>
+            <p th:text="'Data di Nascita: ' + ${giocatore.getDataNascita()}"></p>
+            <p th:text="'Ruolo: ' + ${giocatore.getRuolo()}"></p>
+        </div>
+    </div>
+
+    <div class="adminGiocatori-actions">
+        <a th:href="@{/admin/formNewGiocatore}">Aggiungi Giocatore</a>
+    </div>
 </div>
 
-<div>
-    <a th:href="@{/admin/formNewGiocatore}"> aggiungi giocatore</a>
-</div>
 </body>
 </html>

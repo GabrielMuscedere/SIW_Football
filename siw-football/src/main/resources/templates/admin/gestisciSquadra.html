@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nuova Squadra</title>
+    <title>Gestione Squadra</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Collega il file CSS esterno -->
 </head>
 <body class="homePage">
@@ -23,38 +23,40 @@
         <a href="/logout" class="logout-link">Logout</a>
     </div>
 </div>
+
 <br>
 <br>
 <div class="newSquadra-content">
-    <h2>Inserisci Nuova Squadra</h2>
-    <form th:action="@{/admin/saveSquadra}" method="post" class="newSquadra-form" enctype="multipart/form-data">
+    <h2>Modifica squadra</h2>
+    <form th:action="@{'/admin/salvaModifiche/' + ${squadra.getId()}}" method="post" enctype="multipart/form-data">
         <!-- Campo Nome Squadra -->
         <fieldset>
             <legend>Dati Squadra</legend>
-            <label for="newSquadra-nome">Nome:</label>
-            <input type="text" id="newSquadra-nome" th:field="${squadra.nome}" required>
+            <label for="squadra-nome">Nome:</label>
+            <input type="text" id="squadra-nome" th:field="${squadra.nome}">
 
-            <label for="newSquadra-annoFondazione">Anno di Fondazione:</label>
-            <input type="date" id="newSquadra-annoFondazione" th:field="${squadra.annoFondazione}" required>
+            <label for="squadra-annoFondazione">Anno di Fondazione:</label>
+            <input type="date" id="squadra-annoFondazione" th:field="${squadra.annoFondazione}" required>
 
-            <label for="newSquadra-indirizzoSede">Indirizzo della Sede:</label>
-            <input type="text" id="newSquadra-indirizzoSede" th:field="${squadra.indirizzoSede}" required>
+            <label for="squadra-indirizzoSede">Indirizzo della Sede:</label>
+            <input type="text" id="squadra-indirizzoSede" th:field="${squadra.indirizzoSede}" required>
 
-            <label for="newSquadra-logo">Logo</label>
-            <input type="file" id="newSquadra-logo" name="file" required>
+            <label for="squadra-logo">Logo</label>
+            <input type="file" id="squadra-logo" name="file">
         </fieldset>
 
-        <!-- Selezione Presidente -->
+        <!-- Selezione Presidente
         <fieldset>
-            <legend>Seleziona Presidente</legend>
-            <label for="newSquadra-presidente">Presidente:</label>
-            <select id="newSquadra-presidente" th:field="${squadra.presidente}" required>
+            <legend>Cambia presidente</legend>
+            <label for="squadra-presidente">Presidente:</label>
+            <select id="squadra-presidente" th:field="${squadra.presidente}">
                 <option th:each="presidente : ${presidenti}" th:value="${presidente.codiceFiscale}" th:text="${presidente.nome}"></option>
             </select>
         </fieldset>
+         -->
 
         <button type="submit" class="newSquadra-button">Salva Squadra</button>
     </form>
-</div>
+
 </body>
 </html>
