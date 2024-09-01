@@ -32,9 +32,10 @@
         <p><strong>Cognome:</strong> <span th:text="${authentication.getPresidente().getCognome()}"></span></p>
         <p><strong>Data di Nascita:</strong> <span th:text="${authentication.getPresidente().getDataNascita()}"></span></p>
         <p><strong>Luogo di Nascita:</strong> <span th:text="${authentication.getPresidente().getLuogoNascita()}"></span></p>
-        <p><strong>Squadra:</strong> <span th:text="${authentication.getPresidente().getSquadra().getNome()}"></span></p>
+        <p th:if="${authentication.getPresidente().getSquadra() != null}"><strong>Squadra:</strong> <span th:text="${authentication.getPresidente().getSquadra().getNome()}"></span></p>
+        <p th:if="${authentication.getPresidente().getSquadra() == null}"><strong>Squadra:</strong> <span th:text="'Non hai una squadra assegnata'"></span></p>
     </div>
-    <div class="profilePresident-actions">
+    <div class="profilePresident-actions" th:if="${authentication.getPresidente().getSquadra() != null}">
         <a th:href="'/president/squadra'" class="profilePresident-button">Visualizza Squadra</a>
     </div>
 </div>

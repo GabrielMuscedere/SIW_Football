@@ -29,7 +29,7 @@
 </div>
 
 <!-- Sezione dei dettagli della squadra -->
-<div class="squadra-details">
+<div class="squadra-details" th:if="${authentication.getPresidente().getSquadra() != null}">
     <img th:src="@{'/uploads/' + ${authentication.getPresidente().getSquadra().getImageUrl()}}" alt="Logo di Squadra" class="squadra-logo">
     <div>
         <h2 th:text="${authentication.getPresidente().getSquadra().getNome()}"></h2>
@@ -39,7 +39,7 @@
 </div>
 
 <!-- Sezione delle card dei giocatori -->
-<div class="squadra-container">
+<div class="squadra-container" th:if="${authentication.getPresidente().getSquadra() != null}">
     <div th:if="${authentication.getPresidente().getSquadra().getGiocatori().isEmpty()}">
         Non ci sono giocatori tesserati
     </div>
@@ -55,7 +55,7 @@
 
 
 <!-- Pulsante per accedere alla pagina dei giocatori svincolati -->
-<div class="squadra-container">
+<div class="squadra-container" th:if="${authentication.getPresidente().getSquadra() != null}">
     <a href="/president/giocatoriSvincolati" class="svincolati-link">Visualizza Giocatori Svincolati</a>
 </div>
 

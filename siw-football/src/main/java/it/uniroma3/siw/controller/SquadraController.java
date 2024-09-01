@@ -5,12 +5,14 @@ import it.uniroma3.siw.model.Giocatore;
 import it.uniroma3.siw.model.Presidente;
 import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.repository.PresidenteRepository;
+import it.uniroma3.siw.service.PresidenteService;
 import it.uniroma3.siw.service.SquadraService;
 import it.uniroma3.siw.validator.SquadraValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +43,8 @@ public class SquadraController {
 
     @Value("${file.upload-dir}")
     private String uploadDir;
+    @Autowired
+    private PresidenteService presidenteService;
 
     @GetMapping("/admin/formNewSquadra")
     public String formNewSquadra(Model model,
@@ -126,7 +130,7 @@ public class SquadraController {
 
     @GetMapping("/president/squadra")
     public String squadraPresidente(Model model,
-                          @AuthenticationPrincipal CustomUserDetails userDetails){
+                                    @AuthenticationPrincipal CustomUserDetails userDetails){
 
         model.addAttribute("authentication", userDetails);
 
@@ -169,7 +173,7 @@ public class SquadraController {
         return "admin/gestisciSquadra";
     }
 
-
+    @Transactional
     @PostMapping("/admin/salvaModifiche/{idSquadra}")
     public String saveModifiche(@PathVariable Long idSquadra,
                                 @ModelAttribute("squadra") Squadra updatedSquadra,
@@ -179,15 +183,18 @@ public class SquadraController {
 
         Squadra existSquadra = squadraService.findById(idSquadra);
 
-        existSquadra.setNome(updatedSquadra.getNome());
-        existSquadra.setAnnoFondazione(updatedSquadra.getAnnoFondazione());
-        existSquadra.setIndirizzoSede(updatedSquadra.getIndirizzoSede());
-        if (updatedSquadra.getPresidente() != null) {
-            existSquadra.getPresidente().setSquadra(null);
-            existSquadra.setPresidente(updatedSquadra.getPresidente());
+        if(existSquadra.getPresidente() != null){
+            Presidente presidenteVecchio = existSquadra.getPresidente();
+            presidenteVecchio.setSquadra(null);
+            presidenteService.save(presidenteVecchio);
         }
 
-        if (true) { //vedere perche con !bindingResult.hasError() da errore
+        Presidente presidenteNuovo = presidenteService.findById(updatedSquadra.getPresidente().getCodiceFiscale());
+        existSquadra.setPresidente(presidenteNuovo);
+
+        System.out.println("SONO APPENA FUORI L'IF E IL PRESIDENTE CAMBIATO VALE:" + updatedSquadra.getPresidente().getNome());
+
+        if (updatedSquadra.getImageUrl() != null) { //vedere perche con !bindingResult.hasError() da errore
             try {
                 //gestione del file
                 if(!file.isEmpty()){
@@ -206,6 +213,14 @@ public class SquadraController {
                 }
 
                 this.squadraService.save(existSquadra);
+
+                presidenteNuovo.setSquadra(existSquadra);
+
+                System.out.println("DATI DELL'EXIST SQUADRA");
+                System.out.println(existSquadra.getNome());
+                System.out.println(existSquadra.getPresidente().getNome());
+                System.out.println(existSquadra.getIndirizzoSede());
+
                 redirectAttributes.addFlashAttribute("successMessage", "Squadra e immagine aggiornati con successo.");
                 return "redirect:/admin/squadre";
 
@@ -216,6 +231,7 @@ public class SquadraController {
         }
 
         this.squadraService.save(existSquadra);
+        presidenteNuovo.setSquadra(existSquadra);
         redirectAttributes.addFlashAttribute("successMessage", "Squadra aggiornata con successo.");
 
         return "redirect:admin/squadre";

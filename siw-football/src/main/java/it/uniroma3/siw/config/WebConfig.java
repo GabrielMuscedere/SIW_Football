@@ -12,7 +12,8 @@ public class WebConfig implements WebMvcConfigurer{
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Configura la mappatura per servire le immagini
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:C:/Users/Gabriel/Desktop/SIW_FOOTBALL/uploadsFotoSquadre/");
+                //.addResourceLocations("file:C:/Users/Gabriel/Desktop/SIW_FOOTBALL/uploadsFotoSquadre/");
+                .addResourceLocations("file:C:/Users/gabri/OneDrive/Desktop/SIW_FOOTBALL/uploadsFotoSquadre/");
     }
 
 }
