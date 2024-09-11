@@ -47,7 +47,11 @@
             <legend>Cambia presidente</legend>
             <label for="squadra-presidente">Presidente:</label>
             <select id="squadra-presidente" th:field="${squadra.presidente}">
-                <option th:each="presidente : ${presidenti}" th:value="${presidente.codiceFiscale}" th:text="${presidente.nome}"></option>
+                <option th:each="presidente : ${presidenti}"
+                        th:value="${presidente.codiceFiscale}"
+                        th:text="${presidente.nome}"
+                        th:if="${authentication.getPresidente().getCodiceFiscale() != presidente.getCodiceFiscale()}">
+                </option>
             </select>
         </fieldset>
 

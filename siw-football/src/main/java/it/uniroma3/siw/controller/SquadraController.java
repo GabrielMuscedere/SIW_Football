@@ -43,6 +43,7 @@ public class SquadraController {
 
     @Value("${file.upload-dir}")
     private String uploadDir;
+
     @Autowired
     private PresidenteService presidenteService;
 
