@@ -18,4 +18,8 @@ public class PresidenteService {
     public Presidente findById(String id) {
         return presidenteRepository.findById(id).get();
     }
+
+    public boolean existsByCodiceFiscale(String codiceFiscale){
+        return presidenteRepository.existsById(codiceFiscale);
+    }
 }

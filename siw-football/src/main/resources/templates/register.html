@@ -35,12 +35,15 @@
 
             <label for="register-dataNascita">Data di Nascita:</label>
             <input type="date" id="register-dataNascita" th:field="${presidente.dataNascita}" required>
+            <div th:if="${dataNascitaError != null}" th:text="${dataNascitaError}" class="error-message"></div>
 
             <label for="register-luogoNascita">Luogo di Nascita:</label>
             <input type="text" id="register-luogoNascita" th:field="${presidente.luogoNascita}" required>
 
             <label for="register-codiceFiscale">Codice Fiscale:</label>
             <input type="text" id="register-codiceFiscale" th:field="${presidente.codiceFiscale}" required>
+            <div th:if="${codiceFiscaleError != null}" th:text="${codiceFiscaleError}" class="error-message"></div>
+
         </fieldset>
 
         <!-- Sezione Credenziali -->
@@ -48,9 +51,11 @@
             <legend>Credenziali di Accesso</legend>
             <label for="register-username">Username:</label>
             <input type="text" id="register-username" th:field="${credenziali.username}" required>
+            <div th:if="${usernameError != null}" th:text="${usernameError}" class="error-message"></div>
 
             <label for="register-password">Password:</label>
             <input type="password" id="register-password" th:field="${credenziali.password}" required>
+            <div th:if="${passwordError != null}" th:text="${passwordError}" class="error-message"></div>
 
         </fieldset>
 
@@ -65,5 +70,20 @@
 <footer class="aboutPage-footer">
     <p>&copy; 2024 Siw-Football. All rights reserved.</p>
 </footer>
+<!-- JavaScript per far scomparire i messaggi di errore dopo 5 secondi -->
+<script>
+    window.onload = function() {
+        // Seleziona tutti gli elementi con la classe 'error-message'
+        const errorMessages = document.querySelectorAll('.error-message');
+
+        // Imposta un timer per farli scomparire dopo 5 secondi (5000 millisecondi)
+        setTimeout(() => {
+            errorMessages.forEach(function(message) {
+                message.style.display = 'none';
+            });
+        }, 5000);
+    }
+</script>
+
 </body>
 </html>

@@ -20,4 +20,12 @@ public class CredentialsService {
         credentials.setPassword(passwordEncoder.encode(credentials.getPassword()));
         return credentialsRepository.save(credentials);
     }
+
+    public boolean existsByUsername(String username) {
+        return credentialsRepository.existsByUsername(username);
+    }
+
+    public Credentials findByUsername(String username) {
+        return credentialsRepository.findByUsername(username);
+    }
 }
