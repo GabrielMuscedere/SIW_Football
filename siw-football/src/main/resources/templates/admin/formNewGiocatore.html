@@ -27,22 +27,40 @@
 <div class="newGiocatore-form-container">
     <h2>Inserisci Nuovo Giocatore</h2>
     <form th:action="@{/admin/saveGiocatore}" method="post">
+
+        <!-- Campo Nome -->
         <div class="newGiocatore-form-group">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" th:field="${giocatore.nome}" required>
+            <!-- Mostra l'errore se presente -->
+            <div th:if="${nomeError != null}" th:text="${nomeError}" class="error-message"></div>
         </div>
+
+        <!-- Campo Cognome -->
         <div class="newGiocatore-form-group">
             <label for="cognome">Cognome:</label>
             <input type="text" id="cognome" th:field="${giocatore.cognome}" required>
+            <!-- Mostra l'errore se presente -->
+            <div th:if="${cognomeError != null}" th:text="${cognomeError}" class="error-message"></div>
         </div>
+
+        <!-- Campo Data di Nascita -->
         <div class="newGiocatore-form-group">
             <label for="dataNascita">Data di Nascita:</label>
             <input type="date" id="dataNascita" th:field="${giocatore.dataNascita}" required>
+            <!-- Mostra l'errore se presente -->
+            <div th:if="${dataNascitaError != null}" th:text="${dataNascitaError}" class="error-message"></div>
         </div>
+
+        <!-- Campo Luogo di Nascita -->
         <div class="newGiocatore-form-group">
             <label for="luogoNascita">Luogo di Nascita:</label>
             <input type="text" id="luogoNascita" th:field="${giocatore.luogoNascita}" required>
+            <!-- Mostra l'errore se presente -->
+            <div th:if="${luogoNascitaError != null}" th:text="${luogoNascitaError}" class="error-message"></div>
         </div>
+
+        <!-- Campo Ruolo -->
         <div class="newGiocatore-form-group">
             <label for="ruolo">Ruolo:</label>
             <select id="ruolo" th:field="${giocatore.ruolo}" class="newGiocatore">
@@ -51,12 +69,31 @@
                 <option value="Difensore">Difensore</option>
                 <option value="Portiere">Portiere</option>
             </select>
+            <!-- Mostra l'errore se presente -->
+            <div th:if="${ruoloError != null}" th:text="${ruoloError}" class="error-message"></div>
         </div>
+
+        <!-- Pulsante di Submit -->
         <div class="newGiocatore-form-group">
             <button type="submit">Salva Giocatore</button>
         </div>
     </form>
 </div>
+
+<!-- JavaScript per far scomparire i messaggi di errore dopo 5 secondi -->
+<script>
+    window.onload = function() {
+        // Seleziona tutti gli elementi con la classe 'error-message'
+        const errorMessages = document.querySelectorAll('.error-message');
+
+        // Imposta un timer per farli scomparire dopo 5 secondi (5000 millisecondi)
+        setTimeout(() => {
+            errorMessages.forEach(function(message) {
+                message.style.display = 'hide';
+            });
+        }, 5000);
+    }
+</script>
 
 <br>
 <br>

@@ -8,11 +8,11 @@ import org.springframework.validation.Validator;
 import java.time.LocalDate;
 
 @Component
-public class SquadraValidator implements Validator {
+public class ModificaSquadraValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Squadra.class.equals(clazz);
+        return false;
     }
 
     @Override
@@ -24,10 +24,7 @@ public class SquadraValidator implements Validator {
             errors.rejectValue("nome", "nome.empty", "Il nome della squadra non può essere vuoto.");
         }
 
-        // Validazione per l'anno di fondazione
-        if (squadra.getAnnoFondazione() == null) {
-            errors.rejectValue("annoFondazione", "annoFondazione.empty", "L'anno di fondazione non può essere vuoto.");
-        } else if (squadra.getAnnoFondazione().isAfter(LocalDate.now())) {
+        if (squadra.getAnnoFondazione() != null && squadra.getAnnoFondazione().isAfter(LocalDate.now())) {
             errors.rejectValue("annoFondazione", "annoFondazione.invalid", "L'anno di fondazione non può essere nel futuro.");
         }
 
@@ -36,9 +33,6 @@ public class SquadraValidator implements Validator {
             errors.rejectValue("indirizzoSede", "indirizzoSede.empty", "L'indirizzo della sede non può essere vuoto.");
         }
 
-        // Validazione per il presidente
-        if (squadra.getPresidente() == null) {
-            errors.rejectValue("presidente", "presidente.empty", "Devi selezionare un presidente.");
-        }
+
     }
 }

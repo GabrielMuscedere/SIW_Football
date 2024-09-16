@@ -7,6 +7,7 @@ import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.repository.PresidenteRepository;
 import it.uniroma3.siw.service.PresidenteService;
 import it.uniroma3.siw.service.SquadraService;
+import it.uniroma3.siw.validator.ModificaSquadraValidator;
 import it.uniroma3.siw.validator.SquadraValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,6 +48,9 @@ public class SquadraController {
     @Autowired
     private PresidenteService presidenteService;
 
+    @Autowired
+    private ModificaSquadraValidator modificaSquadraValidator;
+
     @GetMapping("/admin/formNewSquadra")
     public String formNewSquadra(Model model,
                                  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -73,14 +77,13 @@ public class SquadraController {
     @PostMapping("/admin/saveSquadra")
     public String saveSquadra(@ModelAttribute("squadra") Squadra squadra,
                               BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes,
                               @RequestParam("file") MultipartFile file){
 
         this.squadraValidator.validate(squadra, bindingResult);
 
-        if (bindingResult.hasErrors()) {
-
+        if (!bindingResult.hasErrors()) {
             try {
-
                 if (!file.isEmpty()) {
                     Path dirPath = Paths.get(uploadDir);
                     if (!Files.exists(dirPath)) {
@@ -95,6 +98,7 @@ public class SquadraController {
                     String fileUrl = filename;
                     squadra.setImageUrl(fileUrl);
                 }
+
                 this.squadraService.save(squadra);
 
                 Presidente presidente = squadra.getPresidente();
@@ -104,11 +108,13 @@ public class SquadraController {
                 return "redirect:/admin/indexAdmin";
 
             } catch (IOException e) {
-                e.printStackTrace();
-                bindingResult.rejectValue("file", "upload.failed", "Failed to upload file: " + e.getMessage());
+               squadra.setImageUrl("");
             }
         } else {
-            bindingResult.rejectValue("nome", "pizza.duplicate");
+            bindingResult.getFieldErrors().forEach(error ->
+                    redirectAttributes.addFlashAttribute(error.getField() + "Error", error.getDefaultMessage())
+            );
+            return "redirect:/admin/formNewSquadra";
         }
 
         return "redirect:/admin/indexAdmin";
@@ -178,22 +184,36 @@ public class SquadraController {
     @PostMapping("/admin/salvaModifiche/{idSquadra}")
     public String saveModifiche(@PathVariable Long idSquadra,
                                 @ModelAttribute("squadra") Squadra updatedSquadra,
-                                @RequestParam MultipartFile file,
+                                BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
-                                BindingResult bindingResult){
+                                @RequestParam MultipartFile file){
+
+        updatedSquadra.setImageUrl(file.getOriginalFilename());
+        this.modificaSquadraValidator.validate(updatedSquadra, bindingResult);
+        if (bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().forEach(error ->
+                    redirectAttributes.addFlashAttribute(error.getField() + "Error", error.getDefaultMessage())
+            );
+            return "redirect:/admin/gestisciSquadra/" + idSquadra;
+        }
 
         Squadra existSquadra = squadraService.findById(idSquadra);
 
-        if(existSquadra.getPresidente() != null){
-            Presidente presidenteVecchio = existSquadra.getPresidente();
-            presidenteVecchio.setSquadra(null);
-            presidenteService.save(presidenteVecchio);
+        if (updatedSquadra.getPresidente() != null && !existSquadra.getPresidente().getCodiceFiscale().equals(updatedSquadra.getPresidente().getCodiceFiscale())){
+            if (existSquadra.getPresidente() != null) {
+                Presidente presidenteVecchio = existSquadra.getPresidente();
+                presidenteVecchio.setSquadra(null);
+                presidenteRepository.save(presidenteVecchio);
+            }
+            Presidente presidenteNuovo = updatedSquadra.getPresidente();
+            existSquadra.setPresidente(presidenteNuovo);
+            presidenteNuovo.setSquadra(existSquadra);
+            presidenteService.save(presidenteNuovo);
         }
 
-        Presidente presidenteNuovo = presidenteService.findById(updatedSquadra.getPresidente().getCodiceFiscale());
-        existSquadra.setPresidente(presidenteNuovo);
-
-        System.out.println("SONO APPENA FUORI L'IF E IL PRESIDENTE CAMBIATO VALE:" + updatedSquadra.getPresidente().getNome());
+        if (updatedSquadra.getAnnoFondazione() != null) existSquadra.setAnnoFondazione(updatedSquadra.getAnnoFondazione());
+        if (!updatedSquadra.getIndirizzoSede().equals(existSquadra.getIndirizzoSede())) existSquadra.setIndirizzoSede(updatedSquadra.getIndirizzoSede());
+        if (!updatedSquadra.getNome().equals(existSquadra.getNome())) existSquadra.setNome(updatedSquadra.getNome());
 
         if (updatedSquadra.getImageUrl() != null) { //vedere perche con !bindingResult.hasError() da errore
             try {
@@ -213,29 +233,14 @@ public class SquadraController {
                     existSquadra.setImageUrl(fileUrl);
                 }
 
-                this.squadraService.save(existSquadra);
-
-                presidenteNuovo.setSquadra(existSquadra);
-
-                System.out.println("DATI DELL'EXIST SQUADRA");
-                System.out.println(existSquadra.getNome());
-                System.out.println(existSquadra.getPresidente().getNome());
-                System.out.println(existSquadra.getIndirizzoSede());
-
-                redirectAttributes.addFlashAttribute("successMessage", "Squadra e immagine aggiornati con successo.");
-                return "redirect:/admin/squadre";
-
             } catch (IOException e) {
-                e.printStackTrace();
-                bindingResult.rejectValue("file", "upload.failed", "Failed to upload file: " + e.getMessage());
+                existSquadra.setImageUrl("");
             }
         }
 
-        this.squadraService.save(existSquadra);
-        presidenteNuovo.setSquadra(existSquadra);
+        squadraService.save(existSquadra);
         redirectAttributes.addFlashAttribute("successMessage", "Squadra aggiornata con successo.");
-
-        return "redirect:admin/squadre";
+        return "redirect:/admin/squadre";
     }
 
 }

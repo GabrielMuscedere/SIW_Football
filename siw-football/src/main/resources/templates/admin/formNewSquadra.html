@@ -30,15 +30,18 @@
             <legend>Dati Squadra</legend>
             <label for="newSquadra-nome">Nome:</label>
             <input type="text" id="newSquadra-nome" th:field="${squadra.nome}" required>
+            <div th:if="${nomeError != null}" th:text="${nomeError}" class="error-message"></div>
 
             <label for="newSquadra-annoFondazione">Anno di Fondazione:</label>
             <input type="date" id="newSquadra-annoFondazione" th:field="${squadra.annoFondazione}" required>
+            <div th:if="${annoFondazioneError != null}" th:text="${annoFondazioneError}" class="error-message"></div>
 
             <label for="newSquadra-indirizzoSede">Indirizzo della Sede:</label>
             <input type="text" id="newSquadra-indirizzoSede" th:field="${squadra.indirizzoSede}" required>
+            <div th:if="${indirizzoSedeError != null}" th:text="${indirizzoSedeError}" class="error-message"></div>
 
-            <label for="newSquadra-logo">Logo</label>
-            <input type="file" id="newSquadra-logo" name="file" required>
+            <label for="newSquadra-logo">Logo:</label>
+            <input type="file" id="newSquadra-logo" name="file">
         </fieldset>
 
         <!-- Selezione Presidente -->
@@ -46,8 +49,13 @@
             <legend>Seleziona Presidente</legend>
             <label for="newSquadra-presidente">Presidente:</label>
             <select id="newSquadra-presidente" th:field="${squadra.presidente}" required>
-                <option th:each="presidente : ${presidenti}" th:value="${presidente.codiceFiscale}" th:text="${presidente.nome}"></option>
+                <option th:each="presidente : ${presidenti}"
+                        th:value="${presidente.codiceFiscale}"
+                        th:text="${presidente.nome}"
+                        th:if="${presidente.getCodiceFiscale() != authentication.getPresidente().getCodiceFiscale()}">
+                </option>
             </select>
+            <div th:if="${presidenteError != null}" th:text="${presidenteError}" class="error-message"></div>
         </fieldset>
 
         <button type="submit" class="newSquadra-button">Salva Squadra</button>
@@ -61,5 +69,20 @@
 <footer class="aboutPage-footer">
     <p>&copy; 2024 Siw-Football. All rights reserved.</p>
 </footer>
+
+<!-- JavaScript per far scomparire i messaggi di errore dopo 5 secondi -->
+<script>
+    window.onload = function() {
+        // Seleziona tutti gli elementi con la classe 'error-message'
+        const errorMessages = document.querySelectorAll('.error-message');
+
+        // Imposta un timer per farli scomparire dopo 5 secondi (5000 millisecondi)
+        setTimeout(() => {
+            errorMessages.forEach(function(message) {
+                message.style.display = 'none';
+            });
+        }, 5000);
+    }
+</script>
 </body>
 </html>

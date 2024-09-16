@@ -1124,3 +1124,15 @@ body.indxAdmin {
 .contactPage-button:hover {
     background-color: #28a428; /* Verde più scuro */
 }
+
+/*--Messaggi di errore--*/
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: opacity 0.5s ease;
+}
+
+.error-message.hide {
+    opacity: 0;
+}

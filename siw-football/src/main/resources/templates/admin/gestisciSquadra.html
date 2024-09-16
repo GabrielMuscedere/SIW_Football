@@ -32,12 +32,15 @@
 
             <label for="squadra-nome">Nome:</label>
             <input type="text" id="squadra-nome" th:field="${squadra.nome}">
+            <div th:if="${nomeError != null}" th:text="${nomeError}" class="error-message"></div>
 
             <label for="squadra-annoFondazione">Anno di Fondazione:</label>
-            <input type="date" id="squadra-annoFondazione" th:field="${squadra.annoFondazione}" required>
+            <input type="date" id="squadra-annoFondazione" th:field="${squadra.annoFondazione}">
+            <div th:if="${annoFondazioneError != null}" th:text="${annoFondazioneError}" class="error-message"></div>
 
             <label for="squadra-indirizzoSede">Indirizzo della Sede:</label>
-            <input type="text" id="squadra-indirizzoSede" th:field="${squadra.indirizzoSede}" required>
+            <input type="text" id="squadra-indirizzoSede" th:field="${squadra.indirizzoSede}">
+            <div th:if="${indirizzoSedeError != null}" th:text="${indirizzoSedeError}" class="error-message"></div>
 
             <label for="squadra-logo">Logo:</label>
             <input type="file" id="squadra-logo" name="file">
@@ -68,5 +71,21 @@
 <footer class="aboutPage-footer">
     <p>&copy; 2024 Siw-Football. All rights reserved.</p>
 </footer>
+
+<!-- JavaScript per far scomparire i messaggi di errore dopo 5 secondi -->
+<script>
+    window.onload = function() {
+        // Seleziona tutti gli elementi con la classe 'error-message'
+        const errorMessages = document.querySelectorAll('.error-message');
+
+        // Imposta un timer per farli scomparire dopo 5 secondi (5000 millisecondi)
+        setTimeout(() => {
+            errorMessages.forEach(function(message) {
+                message.style.display = 'none';
+            });
+        }, 5000);
+    }
+</script>
+
 </body>
 </html>

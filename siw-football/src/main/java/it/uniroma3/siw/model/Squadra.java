@@ -81,4 +81,17 @@ public class Squadra {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Squadra{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", annoFondazione=" + annoFondazione +
+                ", indirizzoSede='" + indirizzoSede + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", giocatori=" + giocatori +
+                ", presidente=" + presidente +
+                '}';
+    }
 }

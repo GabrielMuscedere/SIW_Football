@@ -5,14 +5,17 @@ import it.uniroma3.siw.model.Giocatore;
 import it.uniroma3.siw.model.GiocatoreTesserato;
 import it.uniroma3.siw.model.Presidente;
 import it.uniroma3.siw.service.GiocatoreService;
+import it.uniroma3.siw.validator.GiocatoreValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,6 +28,9 @@ public class GiocatoreController {
     @Autowired
     private GiocatoreService giocatoreService;
 
+    @Autowired
+    private GiocatoreValidator giocatoreValidator;
+
     @GetMapping("/admin/formNewGiocatore")
     public String formNewGiocatore(Model model,
                                    @AuthenticationPrincipal CustomUserDetails userDetails) {
@@ -35,9 +41,28 @@ public class GiocatoreController {
 
     @PostMapping("/admin/saveGiocatore")
     public String saveGiocatore(@ModelAttribute Giocatore giocatore,
+                                BindingResult result,
+                                RedirectAttributes redirectAttributes,
                                 @AuthenticationPrincipal CustomUserDetails userDetails) {
 
+        // Validazione manuale del giocatore
+        giocatoreValidator.validate(giocatore, result);
+
+        // Se ci sono errori di validazione, reindirizza al form di inserimento con i messaggi di errore
+        if (result.hasErrors()) {
+            // Aggiungi gli errori ai RedirectAttributes
+            result.getFieldErrors().forEach(error ->
+                    redirectAttributes.addFlashAttribute(error.getField() + "Error", error.getDefaultMessage())
+            );
+
+            // Reindirizza alla pagina di inserimento del nuovo giocatore
+            return "redirect:/admin/formNewGiocatore";
+        }
+
+        // Se non ci sono errori, salva il giocatore
         giocatoreService.save(giocatore);
+
+        // Reindirizza alla lista dei giocatori
         return "redirect:/admin/giocatori";
     }
 

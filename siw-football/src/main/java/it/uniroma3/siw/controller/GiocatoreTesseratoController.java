@@ -52,7 +52,7 @@ public class GiocatoreTesseratoController {
         giocatoreTesseratoService.save(giocatoreTesserato);
 
         squadra.getGiocatori().add(giocatoreTesserato);
-        squadraService.save(squadra);
+        //squadraService.save(squadra);
 
         giocatore.getTesseramenti().add(giocatoreTesserato);
         giocatoreService.save(giocatore);
