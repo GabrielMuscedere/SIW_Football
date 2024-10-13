@@ -28,6 +28,16 @@
     <div th:if="${giocatoriSvincolati.isEmpty()}">
         Non ci sono giocatori svincolati
     </div>
+<!--
+    <div>
+        <form th:action="@{'/president/giocatoriSvincolati/cercaPerNome'}" method="post">
+            <label>
+                <input type="text" name="nome" placeholder="nome giocatore">
+            </label>
+            <button type="submit"> Filtra per nome</button>
+        </form>
+    </div>
+ -->
 
     <div th:each="giocatore : ${giocatoriSvincolati}" class="player-card">
         <h2 th:text="${giocatore.getNome()} + ' ' + ${giocatore.getCognome()}"></h2>

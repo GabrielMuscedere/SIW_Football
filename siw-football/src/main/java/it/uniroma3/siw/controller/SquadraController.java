@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.component.CustomUserDetails;
 import it.uniroma3.siw.model.Giocatore;
+import it.uniroma3.siw.model.GiocatoreTesserato;
 import it.uniroma3.siw.model.Presidente;
 import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.repository.PresidenteRepository;
@@ -140,6 +141,7 @@ public class SquadraController {
                                     @AuthenticationPrincipal CustomUserDetails userDetails){
 
         model.addAttribute("authentication", userDetails);
+        model.addAttribute("numero_giocatori", userDetails.getPresidente().getSquadra().getGiocatori().size());
 
         return "president/squadra";
     }
@@ -149,8 +151,13 @@ public class SquadraController {
                           @PathVariable Long idSquadra,
                           @AuthenticationPrincipal CustomUserDetails userDetails){
 
+        Squadra squadra = squadraService.findById(idSquadra);
+        int numero_giocatori = squadra.getGiocatori().size();
+
         model.addAttribute("authentication", userDetails);
-        model.addAttribute("squadra", squadraService.findById(idSquadra));
+        model.addAttribute("squadra", squadra);
+        model.addAttribute("giocatori", squadra.getGiocatori());
+        model.addAttribute("numero_giocatori", numero_giocatori);
 
         return "squadra";
     }
@@ -243,4 +250,23 @@ public class SquadraController {
         return "redirect:/admin/squadre";
     }
 
+
+    @PostMapping("/cercaPerNome/{idSquadra}")
+    public String cercaPerNome(@PathVariable Long idSquadra,
+                               Model model,
+                               @RequestParam String nome,
+                               @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        Squadra squadra = squadraService.findById(idSquadra);
+        int numero_giocatori = squadra.getGiocatori().size();
+
+        List<GiocatoreTesserato> giocatori = squadraService.findByNome(nome, idSquadra);
+        model.addAttribute("giocatori", giocatori);
+        model.addAttribute("authentication", userDetails);
+        model.addAttribute("squadra", squadra);
+        model.addAttribute("numero_giocatori", numero_giocatori);
+
+
+        return "squadra";
+    }
 }

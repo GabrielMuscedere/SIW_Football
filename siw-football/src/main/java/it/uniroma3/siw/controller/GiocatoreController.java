@@ -11,10 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -131,6 +128,52 @@ public class GiocatoreController {
         model.addAttribute("authentication", userDetails);
         model.addAttribute("today", LocalDate.now());
         return "giocatore";
+    }
+
+    @PostMapping("/president/giocatoriSvincolati/cercaPerNome")
+    public String filtra(@RequestParam String nome,
+                         Model model,
+                         @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        Iterable<Giocatore> giocatori = giocatoreService.findAll();
+
+        List<Giocatore> giocatoriLista = new ArrayList<>();
+        giocatori.forEach(giocatoriLista::add);
+
+        List<Giocatore> giocatoriSvincolati = new ArrayList<>();
+
+        for (Giocatore giocatore : giocatoriLista) {
+            // Ordina i tesseramenti per data di fine tesseramento utilizzando un comparatore interno
+            giocatore.getTesseramenti().sort((t1, t2) -> {
+                if (t1.getFineTesseramento() == null && t2.getFineTesseramento() == null) {
+                    return 0;
+                }
+                if (t1.getFineTesseramento() == null) {
+                    return 1;
+                }
+                if (t2.getFineTesseramento() == null) {
+                    return -1;
+                }
+                return t2.getFineTesseramento().compareTo(t1.getFineTesseramento());
+            });
+
+            // Ottieni il tesseramento più recente
+            GiocatoreTesserato ultimoTesseramento = giocatore.getTesseramenti().isEmpty() ? null : giocatore.getTesseramenti().get(0);
+
+            if (ultimoTesseramento == null || ultimoTesseramento.getFineTesseramento().isBefore(LocalDate.now())) {
+                // Aggiungi il giocatore alla lista degli svincolati
+                giocatoriSvincolati.add(giocatore);
+            }
+        }
+        List<Giocatore> giocatoriFiltrati = new ArrayList<>();
+        for(Giocatore g : giocatoriSvincolati) {
+            if(g.getNome().contains(nome)) giocatoriFiltrati.add(g);
+        }
+
+        model.addAttribute("giocatoriSvincolati", giocatoriFiltrati);
+        model.addAttribute("authentication", userDetails);
+
+        return "president/giocatoriSvincolati";
     }
 
 }

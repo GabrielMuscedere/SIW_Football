@@ -5,6 +5,8 @@ import it.uniroma3.siw.repository.PresidenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PresidenteService {
 
@@ -16,7 +18,11 @@ public class PresidenteService {
     }
 
     public Presidente findById(String id) {
-        return presidenteRepository.findById(id).get();
+        Optional<Presidente> pres = presidenteRepository.findById(id);
+        if (pres.isEmpty()){
+            return null;
+        }
+        return pres.get();
     }
 
     public boolean existsByCodiceFiscale(String codiceFiscale){

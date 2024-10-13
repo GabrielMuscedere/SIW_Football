@@ -24,4 +24,5 @@ public class GiocatoreService {
     public Giocatore findById(Long id) {
         return giocatoreRepository.findById(id).get();
     }
+
 }

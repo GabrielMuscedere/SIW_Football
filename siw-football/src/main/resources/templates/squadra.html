@@ -29,10 +29,22 @@
     <img th:src="@{'/uploads/' + ${squadra.getImageUrl()}}" alt="Logo di Squadra" class="squadra-logo">
     <div>
         <h2 th:text="${squadra.getNome()}"></h2>
+        <p>Presidente: <span th:text="${squadra.getPresidente().nome} + ' ' + ${squadra.getPresidente().cognome}"></span></p>
         <p>Anno di Fondazione: <span th:text="${squadra.getAnnoFondazione()}"></span></p>
         <p>Indirizzo Sede: <span th:text="${squadra.getIndirizzoSede()}"></span></p>
+        <p>Numero giocatori tesserati: <span th:text="${numero_giocatori}"></span></p>
     </div>
 </div>
+
+<!--
+<div>
+    <form th:action="@{'/cercaPerNome/' + ${squadra.getId()}}" method="post">
+        <input type="text" name="nome" placeholder="Nome giocatore" required>
+        <button type="submit">Filtra per nome</button>
+    </form>
+</div>
+-->
+
 
 <!-- Sezione delle card dei giocatori -->
 <div class="squadra-container">
@@ -40,7 +52,7 @@
         Non ci sono giocatori tesserati
     </div>
 
-    <div th:each="giocatore : ${squadra.getGiocatori()}" class="player-card">
+    <div th:each="giocatore : ${giocatori}" class="player-card">
         <h2 th:text="${giocatore.getGiocatore().getNome()} + ' ' + ${giocatore.getGiocatore().getCognome()}"></h2>
         <p>Data di Nascita: <span th:text="${giocatore.getGiocatore().getDataNascita()}"></span></p>
         <p>Luogo di Nascita: <span th:text="${giocatore.getGiocatore().getLuogoNascita()}"></span></p>

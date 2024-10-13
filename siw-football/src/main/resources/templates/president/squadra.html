@@ -33,8 +33,10 @@
     <img th:src="@{'/uploads/' + ${authentication.getPresidente().getSquadra().getImageUrl()}}" alt="Logo di Squadra" class="squadra-logo">
     <div>
         <h2 th:text="${authentication.getPresidente().getSquadra().getNome()}"></h2>
+        <p>Presidente: <span th:text="${authentication.getPresidente().nome} + ' ' + ${authentication.getPresidente().cognome}"></span></p>
         <p>Anno di Fondazione: <span th:text="${authentication.getPresidente().getSquadra().getAnnoFondazione()}"></span></p>
         <p>Indirizzo Sede: <span th:text="${authentication.getPresidente().getSquadra().getIndirizzoSede()}"></span></p>
+        <p>Numero giocatori tesserati: <span th:text="${numero_giocatori}"></span></p>
     </div>
 </div>
 
